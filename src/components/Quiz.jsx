@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { submitLead } from '../utils/submitForm'
 
 const QUESTIONS = [
   {
@@ -79,10 +80,21 @@ function segmentFor(answers) {
   return 'horeca'
 }
 
+function answersSummary(answers) {
+  const summary = {}
+  for (const q of QUESTIONS) {
+    const opt = q.options.find((o) => o.value === answers[q.key])
+    if (opt) summary[q.title] = opt.label
+  }
+  return summary
+}
+
 export default function Quiz() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({})
   const [quizFormDone, setQuizFormDone] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(false)
 
   const active = step < QUESTIONS.length
   const cur = QUESTIONS[Math.min(step, QUESTIONS.length - 1)]
@@ -102,9 +114,22 @@ export default function Quiz() {
     setAnswers({})
     setQuizFormDone(false)
   }
-  function quizSubmit(e) {
+  async function quizSubmit(e) {
     e.preventDefault()
-    setQuizFormDone(true)
+    setSending(true)
+    setError(false)
+    try {
+      const data = Object.fromEntries(new FormData(e.target))
+      await submitLead(
+        { ...data, 'Профиль': segMeta.title, ...answersSummary(answers) },
+        'Заявка из квиза на сайте Max Christmas',
+      )
+      setQuizFormDone(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -146,14 +171,21 @@ export default function Quiz() {
               {!quizFormDone ? (
                 <form onSubmit={quizSubmit} style={{ marginTop: 26 }}>
                   <div className="form-grid">
-                    <input className="fld" placeholder="Ваше имя" required />
-                    <input className="fld" placeholder="Телефон" required />
+                    <input className="fld" name="Имя" placeholder="Ваше имя" required />
+                    <input className="fld" name="Телефон" placeholder="Телефон" required />
                   </div>
-                  <input className="fld" style={{ marginTop: 14 }} placeholder="Компания / организация" />
+                  <input className="fld" name="Компания" style={{ marginTop: 14 }} placeholder="Компания / организация" />
                   <div className="fx ac gap16 wrap" style={{ marginTop: 20 }}>
-                    <button type="submit" className="btn btn-red btn-lg">Получить персональный расчёт</button>
+                    <button type="submit" className="btn btn-red btn-lg" disabled={sending} style={{ opacity: sending ? 0.7 : 1 }}>
+                      {sending ? 'Отправка…' : 'Получить персональный расчёт'}
+                    </button>
                     <button type="button" className="btn btn-ghost-d" onClick={restart}>Пройти заново</button>
                   </div>
+                  {error && (
+                    <p style={{ fontSize: 13.5, marginTop: 14, color: '#AC4346' }}>
+                      Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам напрямую.
+                    </p>
+                  )}
                 </form>
               ) : (
                 <div className="thanks" style={{ marginTop: 24, background: 'rgba(172,67,70,.08)', borderColor: 'rgba(172,67,70,.4)' }}>

@@ -1,3 +1,4 @@
+import Header from './components/Header'
 import Quiz from './components/Quiz'
 import FooterForm from './components/FooterForm'
 import { scrollToId } from './utils/scroll'
@@ -20,25 +21,7 @@ const TEL_HREF = PHONE.replace(/[^+\d]/g, '')
 function App() {
   return (
     <>
-      <header className="hdr">
-        <div className="wrap hdr-in">
-          <a href="#top" className="logo">
-            <img className="logo-img" src={logoDark} alt="Max Christmas" />
-            <small>ФАБРИКА ЁЛЕЙ · СЕВАСТОПОЛЬ</small>
-          </a>
-          <nav className="nav">
-            <a href="#interior">Интерьер</a>
-            <a href="#outdoor">Улица</a>
-            <a href="#case">Кейс</a>
-            <a href="#trust">Гарантии</a>
-            <a href="#quiz">Подбор</a>
-          </nav>
-          <div className="hdr-r">
-            <a className="hdr-tel" href={`tel:${TEL_HREF}`}>{PHONE}</a>
-            <button className="btn btn-red" onClick={() => scrollToId('lead')}>Получить КП</button>
-          </div>
-        </div>
-      </header>
+      <Header phone={PHONE} telHref={TEL_HREF} />
 
       {/* BLOCK 1 HERO */}
       <section className="hero" id="top">
