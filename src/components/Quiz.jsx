@@ -1,0 +1,170 @@
+import { useState } from 'react'
+
+const QUESTIONS = [
+  {
+    key: 'loc',
+    title: 'Где будет установлена ель?',
+    hint: 'От этого зависит конструкция и материалы.',
+    options: [
+      { label: 'В помещении — интерьер', value: 'interior' },
+      { label: 'На улице — открытая площадка', value: 'outdoor' },
+    ],
+  },
+  {
+    key: 'height',
+    title: 'Какая нужна высота?',
+    hint: 'Ориентировочно — уточним при расчёте.',
+    options: [
+      { label: 'До 3 метров', value: 'to3' },
+      { label: '3–6 метров', value: '3-6' },
+      { label: '6–12 метров', value: '6-12' },
+      { label: 'Выше 12 метров', value: '12+' },
+    ],
+  },
+  {
+    key: 'decor',
+    title: 'Что важно в декоре?',
+    hint: 'Поможет подобрать комплектацию.',
+    options: [
+      { label: 'Встроенная подсветка / электрогирлянды', value: 'light' },
+      { label: 'Брендирование в фирменном стиле', value: 'brand' },
+      { label: 'Комплект декора «под ключ»', value: 'full' },
+      { label: 'Только ель, без спецдекора', value: 'none' },
+    ],
+  },
+  {
+    key: 'purchase',
+    title: 'Как планируете закупку?',
+    hint: 'Определяет формат договора и документов.',
+    options: [
+      { label: 'Прямой договор (B2B)', value: 'direct' },
+      { label: 'Тендер по 44-ФЗ / 223-ФЗ (B2G)', value: 'tender' },
+    ],
+  },
+  {
+    key: 'stage',
+    title: 'На какой вы стадии?',
+    hint: 'Подстроим предложение под готовность.',
+    options: [
+      { label: 'Есть ТЗ / чертежи', value: 'ready' },
+      { label: 'Есть идея и бюджет', value: 'idea' },
+      { label: 'Только присматриваюсь', value: 'early' },
+      { label: 'Срочно — горят сроки', value: 'urgent' },
+    ],
+  },
+]
+
+const SEGMENTS = {
+  gov: {
+    color: '#243C60',
+    title: 'Профиль: город / девелопер · B2G',
+    text: 'Спроектируем и произведём высотную уличную ель по вашему ТЗ с расчётом ветровых и сейсмических нагрузок. Подготовим пакет документов для тендера (44-ФЗ / 223-ФЗ), смету и график монтажа под ключ.',
+  },
+  street: {
+    color: '#AC4346',
+    title: 'Профиль: уличная ель для вашей территории',
+    text: 'Подберём или спроектируем уличную ель под площадку, рассчитаем нагрузки и организуем монтаж под ключ. Изготовим электрогирлянды для наружного освещения под ваш проект. Все грузы застрахованы на 100%.',
+  },
+  horeca: {
+    color: '#C79A5B',
+    title: 'Профиль: интерьер · HoReCa / бизнес',
+    text: 'Подберём интерьерную ель (включая новинки — 5 м с интегрированным светом и 6 м ель-колонну), декор и электрогирлянды для интерьерного освещения в вашем фирменном стиле — можем встроить подсветку в конструкцию ели. Пожаробезопасные материалы с допуском для мест массового пребывания.',
+  },
+}
+
+function segmentFor(answers) {
+  const bigOutdoor = answers.loc === 'outdoor' && (answers.height === '6-12' || answers.height === '12+')
+  if (answers.purchase === 'tender' || bigOutdoor) return 'gov'
+  if (answers.loc === 'outdoor') return 'street'
+  return 'horeca'
+}
+
+export default function Quiz() {
+  const [step, setStep] = useState(0)
+  const [answers, setAnswers] = useState({})
+  const [quizFormDone, setQuizFormDone] = useState(false)
+
+  const active = step < QUESTIONS.length
+  const cur = QUESTIONS[Math.min(step, QUESTIONS.length - 1)]
+  const seg = segmentFor(answers)
+  const segMeta = SEGMENTS[seg]
+  const pct = Math.round((step / QUESTIONS.length) * 100)
+
+  function pick(key, value) {
+    setAnswers((a) => ({ ...a, [key]: value }))
+    setStep((s) => s + 1)
+  }
+  function back() {
+    if (step > 0) setStep((s) => s - 1)
+  }
+  function restart() {
+    setStep(0)
+    setAnswers({})
+    setQuizFormDone(false)
+  }
+  function quizSubmit(e) {
+    e.preventDefault()
+    setQuizFormDone(true)
+  }
+
+  return (
+    <div className="quiz-card" style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr' }}>
+        <div className="quiz-main">
+          {active ? (
+            <>
+              <div className="fx ac jb" style={{ marginBottom: 14 }}>
+                <span className="tag c-taupe">Вопрос {step + 1} из {QUESTIONS.length}</span>
+                <span className="tag c-red">{pct}% пройдено</span>
+              </div>
+              <div className="prog"><div className="prog-in" style={{ width: `${pct}%` }} /></div>
+              <h3 className="h3 c-navy" style={{ maxWidth: '24ch' }}>{cur.title}</h3>
+              <p className="c-mut" style={{ margin: '8px 0 26px', fontSize: 15 }}>{cur.hint}</p>
+              <div className="qopts">
+                {cur.options.map((opt) => (
+                  <button
+                    key={opt.value}
+                    className={'quiz-opt' + (answers[cur.key] === opt.value ? ' on' : '')}
+                    onClick={() => pick(cur.key, opt.value)}
+                  >
+                    <span className="qmark" />
+                    <span>{opt.label}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="fx ac gap16" style={{ marginTop: 30 }}>
+                <button className="btn btn-ghost-d" onClick={back} style={{ visibility: step > 0 ? 'visible' : 'hidden' }}>
+                  ← Назад
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="badge-new" style={{ background: segMeta.color }}>Ваш профиль определён</div>
+              <h3 className="h3 c-navy" style={{ marginTop: 16, maxWidth: '22ch' }}>{segMeta.title}</h3>
+              <p className="lead" style={{ marginTop: 14 }}>{segMeta.text}</p>
+              {!quizFormDone ? (
+                <form onSubmit={quizSubmit} style={{ marginTop: 26 }}>
+                  <div className="form-grid">
+                    <input className="fld" placeholder="Ваше имя" required />
+                    <input className="fld" placeholder="Телефон" required />
+                  </div>
+                  <input className="fld" style={{ marginTop: 14 }} placeholder="Компания / организация" />
+                  <div className="fx ac gap16 wrap" style={{ marginTop: 20 }}>
+                    <button type="submit" className="btn btn-red btn-lg">Получить персональный расчёт</button>
+                    <button type="button" className="btn btn-ghost-d" onClick={restart}>Пройти заново</button>
+                  </div>
+                </form>
+              ) : (
+                <div className="thanks" style={{ marginTop: 24, background: 'rgba(172,67,70,.08)', borderColor: 'rgba(172,67,70,.4)' }}>
+                  <h3 className="h3 c-navy">Заявка принята ✓</h3>
+                  <p style={{ margin: '10px 0 0', color: '#4a453d' }}>Менеджер свяжется с вами в течение рабочего дня и подготовит КП под ваш проект.</p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
