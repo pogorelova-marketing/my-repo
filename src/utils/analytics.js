@@ -1,6 +1,4 @@
-// TODO: replace with the real Яндекс.Метрика counter ID once created at metrika.yandex.ru,
-// and update the matching noscript pixel in index.html to the same number.
-const YM_COUNTER_ID = '00000000'
+const YM_COUNTER_ID = 110452002
 
 let initialized = false
 
@@ -20,14 +18,18 @@ export function initYandexMetrica() {
     k.async = 1
     k.src = r
     a.parentNode.insertBefore(k, a)
-  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+  })(window, document, 'script', `https://mc.yandex.ru/metrika/tag.js?id=${YM_COUNTER_ID}`, 'ym')
   /* eslint-enable */
 
   window.ym(YM_COUNTER_ID, 'init', {
-    clickmap: true,
-    trackLinks: true,
-    accurateTrackBounce: true,
+    ssr: true,
     webvisor: true,
+    clickmap: true,
+    ecommerce: 'dataLayer',
+    referrer: document.referrer,
+    url: location.href,
+    accurateTrackBounce: true,
+    trackLinks: true,
   })
 }
 
