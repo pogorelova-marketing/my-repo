@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { submitLead } from '../utils/submitForm'
+import { ymGoal } from '../utils/analytics'
 
 const QUESTIONS = [
   {
@@ -95,6 +96,8 @@ export default function Quiz() {
   const [quizFormDone, setQuizFormDone] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(false)
+  const startedRef = useRef(false)
+  const completedRef = useRef(false)
 
   const active = step < QUESTIONS.length
   const cur = QUESTIONS[Math.min(step, QUESTIONS.length - 1)]
@@ -103,8 +106,17 @@ export default function Quiz() {
   const pct = Math.round((step / QUESTIONS.length) * 100)
 
   function pick(key, value) {
+    if (!startedRef.current) {
+      startedRef.current = true
+      ymGoal('quiz_start')
+    }
+    const next = step + 1
     setAnswers((a) => ({ ...a, [key]: value }))
-    setStep((s) => s + 1)
+    setStep(next)
+    if (next >= QUESTIONS.length && !completedRef.current) {
+      completedRef.current = true
+      ymGoal('quiz_complete')
+    }
   }
   function back() {
     if (step > 0) setStep((s) => s - 1)
@@ -124,6 +136,7 @@ export default function Quiz() {
         { ...data, 'Профиль': segMeta.title, ...answersSummary(answers) },
         'Заявка из квиза на сайте Max Christmas',
       )
+      ymGoal('form_submit')
       setQuizFormDone(true)
     } catch {
       setError(true)

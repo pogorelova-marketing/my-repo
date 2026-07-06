@@ -9,6 +9,7 @@ export async function submitLead(fields, subject) {
       _subject: subject,
       _template: 'table',
       _captcha: 'false',
+      _cc: 'manager@max-christmas.ru',
     }),
   })
   if (!res.ok) throw new Error(`FormSubmit error: ${res.status}`)

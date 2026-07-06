@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { submitLead } from '../utils/submitForm'
+import { ymGoal } from '../utils/analytics'
 
 export default function FooterForm() {
   const [done, setDone] = useState(false)
@@ -24,6 +25,7 @@ export default function FooterForm() {
     try {
       const data = Object.fromEntries(new FormData(e.target))
       await submitLead(data, 'Заявка на КП с сайта Max Christmas')
+      ymGoal('form_submit')
       setDone(true)
     } catch {
       setError(true)
