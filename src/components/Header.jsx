@@ -5,7 +5,7 @@ import logoDark from '../assets/logo-dark.png'
 const LINKS = [
   { id: 'interior', label: 'Интерьер' },
   { id: 'outdoor', label: 'Улица' },
-  { id: 'case', label: 'Кейс' },
+  { id: 'case', label: 'Наши работы' },
   { id: 'trust', label: 'Гарантии' },
   { id: 'quiz', label: 'Подбор' },
 ]
@@ -38,7 +38,7 @@ export default function Header({ phone, telHref }) {
       <div className="wrap hdr-in">
         <a href="#top" className="logo" onClick={() => setOpen(false)}>
           <img className="logo-img" src={logoDark} alt="Max Christmas" />
-          <small>ФАБРИКА ЁЛЕЙ · СЕВАСТОПОЛЬ</small>
+          <small>ФАБРИКА ЕЛЕЙ · СЕВАСТОПОЛЬ</small>
         </a>
         <nav className="nav">
           {LINKS.map((l) => (

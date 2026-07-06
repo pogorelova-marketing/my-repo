@@ -91,9 +91,9 @@ function App() {
               </div>
               <ul className="flist">
                 <li><span className="fi" /><span><b>Новинки сезона:</b> ель 5 м с интегрированной подсветкой и ель-колонна 6 м.</span></li>
-                <li><span className="fi" /><span><b>Ель со встроенной электрогирляндой</b> — аккуратный световой контур без внешних проводов.</span></li>
+                <li><span className="fi" /><span><b>Ель со встроенной электрогирляндой</b> — без свисающих заметных проводов, экономия времени на монтаже.</span></li>
                 <li><span className="fi" /><span>Электрогирлянды под ваш проект для интерьерного освещения — размер и сценарий свечения на выбор.</span></li>
-                <li><span className="fi" /><span>Комплекты декора и украшения в вашем корпоративном / брендовом стиле.</span></li>
+                <li><span className="fi" /><span>Комплекты декора и украшения в вашем корпоративном стиле, соответствие брендбуку.</span></li>
                 <li><span className="fi" /><span>Пожаробезопасные материалы — допуск для мест массового пребывания людей.</span></li>
               </ul>
               <div className="fx wrap gap16" style={{ marginTop: 32 }}>
@@ -167,7 +167,7 @@ function App() {
           two-column body, so it reads as the peak, not another module. */}
       <section className="sec bg-cream" id="case">
         <div className="wrap">
-          <div className="eyebrow c-red">Флагманский кейс</div>
+          <div className="eyebrow c-red">Наши работы</div>
           <h2 className="case-num-row">
             <span className="case-num">20 м</span>
             <span className="case-num-sub">
@@ -193,13 +193,13 @@ function App() {
         <div className="wrap">
           <div style={{ maxWidth: 720 }}>
             <div className="eyebrow c-gold">Почему фабрика, а не посредник</div>
-            <h2 className="h2 c-cream" style={{ marginTop: 16 }}>Закрываем риски проекта — от расчёта до доставки</h2>
+            <h2 className="h2 c-cream" style={{ marginTop: 16 }}>Берём на себя риски проекта — от расчёта до доставки</h2>
           </div>
           <div className="tcards">
             <div className="tcard">
               <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 21h18M6 21V8l6-4 6 4v13" /><path d="M9 12l2 2 4-4" /></svg>
               <h3 className="h3 c-cream" style={{ fontSize: 20 }}>Инженерные расчёты</h3>
-              <p className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14.5, marginTop: 10 }}>Расчёт ветровых и сейсмических нагрузок для каждой высотной конструкции.</p>
+              <p className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14.5, marginTop: 10 }}>Расчёт ветровых нагрузок для каждой высотной конструкции.</p>
             </div>
             <div className="tcard">
               <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3 2 3 4 3 4 3s-2-3 0-9z" /></svg>
@@ -219,7 +219,6 @@ function App() {
           </div>
           <div className="stats">
             <div className="stat"><div className="num-serif">24</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>года на рынке</div></div>
-            <div className="stat"><div className="num-serif">20 м</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>макс. высота проекта</div></div>
             <div className="stat"><div className="num-serif">100%</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>страховка грузов</div></div>
             <div className="stat"><div className="num-serif">44·223</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>ФЗ · работа с тендерами</div></div>
           </div>
