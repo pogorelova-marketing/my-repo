@@ -12,7 +12,6 @@ import outdoorNight from './assets/outdoor-night.jpg'
 import exh2 from './assets/exh2.jpg'
 import exh4 from './assets/exh4.jpg'
 import sev1 from './assets/sev1.jpg'
-import sev2 from './assets/sev2.jpg'
 
 const PHONE = '8 800 250-71-83'
 const EMAIL = 'manager@max-christmas.ru'
@@ -182,26 +181,6 @@ function App() {
             </p>
             <div className="case-photo"><img src={sev1} alt="20-метровая Морская ёлка в Севастополе" /></div>
           </div>
-          <div className="tl">
-            <div className="tl-step">
-              <div className="tl-media"><div className="ph"><span className="ph-lbl">фото: эскиз-концепт</span></div></div>
-              <div className="tl-no">01</div>
-              <div className="tl-t">Эскиз и концепция</div>
-              <div className="tl-d">Художественная проработка образа «морской» ёлки под символику города.</div>
-            </div>
-            <div className="tl-step">
-              <div className="tl-media"><div className="ph"><span className="ph-lbl">фото: проектирование + цех</span></div></div>
-              <div className="tl-no">02</div>
-              <div className="tl-t">Проектирование и производство</div>
-              <div className="tl-d">Конструктив, расчёт ветровых нагрузок и изготовление на собственном производстве.</div>
-            </div>
-            <div className="tl-step">
-              <div className="tl-media"><img src={sev2} alt="Морская ёлка ночью — морской декор" /></div>
-              <div className="tl-no">03</div>
-              <div className="tl-t">Монтаж</div>
-              <div className="tl-d">Высотная сборка, установка кранами и запуск иллюминации на площади.</div>
-            </div>
-          </div>
           <div className="fx wrap gap16 ac" style={{ marginTop: 40 }}>
             <a className="btn btn-ghost-d" href="https://maxchristmas-store.ru/articles/eksklyuzivnaya_morskaya_yelka_dlya_sevastopolya_/" target="_blank" rel="noopener noreferrer">Читать полный кейс →</a>
             <span className="c-mut" style={{ fontSize: 14 }}>Эскизы · чертежи · фото цехов · видео зажжения</span>
@@ -239,7 +218,7 @@ function App() {
             </div>
           </div>
           <div className="stats">
-            <div className="stat"><div className="num-serif">12+</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>лет на рынке</div></div>
+            <div className="stat"><div className="num-serif">24</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>года на рынке</div></div>
             <div className="stat"><div className="num-serif">20 м</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>макс. высота проекта</div></div>
             <div className="stat"><div className="num-serif">100%</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>страховка грузов</div></div>
             <div className="stat"><div className="num-serif">44·223</div><div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 8 }}>ФЗ · работа с тендерами</div></div>

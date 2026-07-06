@@ -46,7 +46,6 @@ export default function FooterForm() {
       <select className="fld" name="Тип проекта" style={{ marginTop: 14 }}>
         <option>Интерьерная ель / декор (HoReCa)</option>
         <option>Высотная уличная ель</option>
-        <option>Тендер 44-ФЗ / 223-ФЗ</option>
         <option>Электрогирлянды под проект (улица / интерьер)</option>
       </select>
       <textarea
