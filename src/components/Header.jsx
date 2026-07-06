@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { scrollToId } from '../utils/scroll'
 import logoDark from '../assets/logo-dark.png'
 
@@ -12,6 +12,21 @@ const LINKS = [
 
 export default function Header({ phone, telHref }) {
   const [open, setOpen] = useState(false)
+  const burgerRef = useRef(null)
+  const firstLinkRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    firstLinkRef.current?.focus()
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        setOpen(false)
+        burgerRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   function goTo(id) {
     setOpen(false)
@@ -34,6 +49,7 @@ export default function Header({ phone, telHref }) {
           <a className="hdr-tel" href={`tel:${telHref}`}>{phone}</a>
           <button className="btn btn-red" onClick={() => goTo('lead')}>Получить КП</button>
           <button
+            ref={burgerRef}
             className="hdr-burger"
             aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={open}
@@ -49,8 +65,8 @@ export default function Header({ phone, telHref }) {
       </div>
       {open && (
         <nav className="mobile-nav">
-          {LINKS.map((l) => (
-            <a key={l.id} href={`#${l.id}`} onClick={() => setOpen(false)}>{l.label}</a>
+          {LINKS.map((l, i) => (
+            <a key={l.id} ref={i === 0 ? firstLinkRef : null} href={`#${l.id}`} onClick={() => setOpen(false)}>{l.label}</a>
           ))}
           <a href={`tel:${telHref}`} className="mobile-nav-tel" onClick={() => setOpen(false)}>{phone}</a>
         </nav>

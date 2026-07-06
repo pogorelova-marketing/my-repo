@@ -98,8 +98,8 @@ function App() {
                 <li><span className="fi" /><span>Пожаробезопасные материалы — допуск для мест массового пребывания людей.</span></li>
               </ul>
               <div className="fx wrap gap16" style={{ marginTop: 32 }}>
-                <a className="btn btn-primary" href="https://maxchristmas-store.ru/iskusstevennye_eli/vysotnye_eli/" target="_blank" rel="noopener noreferrer">Смотреть каталог елей →</a>
-                <button className="btn btn-ghost-d" onClick={() => scrollToId('lead')}>Обсудить проект</button>
+                <button className="btn btn-red" onClick={() => scrollToId('lead')}>Обсудить проект</button>
+                <a className="btn btn-ghost-d" href="https://maxchristmas-store.ru/iskusstevennye_eli/vysotnye_eli/" target="_blank" rel="noopener noreferrer">Смотреть каталог елей →</a>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ function App() {
                 </div>
               </div>
               <div className="fx wrap gap16" style={{ marginTop: 32 }}>
-                <button className="btn btn-gold" onClick={() => scrollToId('quiz')}>Рассчитать проект по ТЗ →</button>
+                <button className="btn btn-red" onClick={() => scrollToId('quiz')}>Рассчитать проект по ТЗ →</button>
               </div>
             </div>
             <div>
@@ -163,17 +163,23 @@ function App() {
         </div>
       </section>
 
-      {/* BLOCK 5 CASE */}
+      {/* BLOCK 5 CASE — the flagship project gets the page's one dramatic
+          type moment: a full-width numeral lead-in before the standard
+          two-column body, so it reads as the peak, not another module. */}
       <section className="sec bg-cream" id="case">
         <div className="wrap">
-          <div className="two" style={{ alignItems: 'center' }}>
-            <div>
-              <div className="eyebrow c-red">Флагманский кейс</div>
-              <h2 className="h2 c-navy" style={{ marginTop: 16 }}>20-метровая «Морская ёлка» для Севастополя</h2>
-              <p className="lead" style={{ marginTop: 16 }}>
-                От эскиза и инженерных чертежей — через производство в цехах — до монтажа кранами и торжественного зажжения. Полный цикл силами фабрики: конструкция с расчётом нагрузок и фирменный «морской» декор — якоря, штурвалы, парусники.
-              </p>
-            </div>
+          <div className="eyebrow c-red">Флагманский кейс</div>
+          <h2 className="case-num-row">
+            <span className="case-num">20 м</span>
+            <span className="case-num-sub">
+              <span className="case-num-title">«Морская ёлка»</span>
+              <span className="case-num-city">для Севастополя</span>
+            </span>
+          </h2>
+          <div className="two case-body" style={{ alignItems: 'center' }}>
+            <p className="lead">
+              От эскиза и инженерных чертежей — через производство в цехах — до монтажа кранами и торжественного зажжения. Полный цикл силами фабрики: конструкция с расчётом нагрузок и фирменный «морской» декор — якоря, штурвалы, парусники.
+            </p>
             <div className="case-photo"><img src={sev1} alt="20-метровая Морская ёлка в Севастополе" /></div>
           </div>
           <div className="tl">
@@ -197,7 +203,7 @@ function App() {
             </div>
           </div>
           <div className="fx wrap gap16 ac" style={{ marginTop: 40 }}>
-            <a className="btn btn-primary" href="https://maxchristmas-store.ru/articles/eksklyuzivnaya_morskaya_yelka_dlya_sevastopolya_/" target="_blank" rel="noopener noreferrer">Читать полный кейс →</a>
+            <a className="btn btn-ghost-d" href="https://maxchristmas-store.ru/articles/eksklyuzivnaya_morskaya_yelka_dlya_sevastopolya_/" target="_blank" rel="noopener noreferrer">Читать полный кейс →</a>
             <span className="c-mut" style={{ fontSize: 14 }}>Эскизы · чертежи · фото цехов · видео зажжения</span>
           </div>
         </div>
