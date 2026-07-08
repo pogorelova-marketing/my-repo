@@ -1,4 +1,4 @@
-const YM_COUNTER_ID = 110452002
+const YM_COUNTER_ID = 110509174
 
 let initialized = false
 
