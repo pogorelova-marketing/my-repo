@@ -1,7 +1,7 @@
 // Google Sheet + Apps Script is the single source of truth for lead delivery:
 // it logs every submission to the sheet AND emails it (via MailApp) in one
 // server-side step, so the site no longer depends on FormSubmit's uptime.
-const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzi-ylYgTMkWT-g8ypkbrVjd7A2xAgYqU6vbKuU8mwG5_XvQgkdDhnTJS1e3-HSXtA/exec'
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxTTMvD8N3jZtHoms7LSDpNeXiRXwvRtzwezjJSgE9_1lfmKMTHuzOOru8Li0oXen6B/exec'
 
 export async function submitLead(fields, subject) {
   // Apps Script Web Apps don't return CORS headers, so we fire with mode:
