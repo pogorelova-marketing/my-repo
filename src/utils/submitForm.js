@@ -1,8 +1,6 @@
 const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/m.pogorelova@max-christmas.ru'
 
-// TODO: paste the Google Apps Script Web App URL here once deployed
-// (Sheets → Extensions → Apps Script → Deploy → New deployment → Web app).
-const SHEET_ENDPOINT = ''
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzi-ylYgTMkWT-g8ypkbrVjd7A2xAgYqU6vbKuU8mwG5_XvQgkdDhnTJS1e3-HSXtA/exec'
 
 async function submitToFormsubmit(fields, subject) {
   const res = await fetch(FORMSUBMIT_ENDPOINT, {
