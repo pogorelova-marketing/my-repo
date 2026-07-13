@@ -44,7 +44,10 @@ export default function FooterForm() {
         <input className="fld" name="Имя" placeholder="Имя" required />
         <input className="fld" name="Телефон" placeholder="Телефон" required />
       </div>
-      <input className="fld" name="Компания" style={{ marginTop: 14 }} placeholder="Компания / организация" />
+      <div className="form-grid" style={{ marginTop: 14 }}>
+        <input className="fld" name="Email" type="email" placeholder="Email" />
+        <input className="fld" name="Компания" placeholder="Компания / организация" />
+      </div>
       <select className="fld" name="Тип проекта" style={{ marginTop: 14 }}>
         <option>Интерьерная ель / декор (HoReCa)</option>
         <option>Высотная уличная ель</option>
