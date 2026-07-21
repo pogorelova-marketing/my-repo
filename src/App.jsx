@@ -8,7 +8,6 @@ import heroOutdoor from './assets/hero-outdoor.jpg'
 import interiorPremium from './assets/interior-premium.jpg'
 import catVersal from './assets/cat-versal.jpg'
 import catKupech from './assets/cat-kupech.jpg'
-import outdoorNight from './assets/outdoor-night.jpg'
 import exh2 from './assets/exh2.jpg'
 import exh4 from './assets/exh4.jpg'
 import sev1 from './assets/sev1.jpg'
@@ -118,45 +117,41 @@ function App() {
       {/* BLOCK 4 OUTDOOR */}
       <section className="sec bg-navy" id="outdoor">
         <div className="wrap">
-          <div className="two">
-            <div>
-              <div className="eyebrow c-gold">Направление 02 · Уличные высотные ели</div>
-              <h2 className="h2 c-cream" style={{ marginTop: 16 }}>Уличные высотные ели любой сложности — по вашему ТЗ</h2>
-              <p className="lead c-mut2" style={{ marginTop: 18, color: '#cfc7b7' }}>
-                Для городских администраций, девелоперов и парков. Проектируем и производим уличные ели с полным инженерным расчётом и монтажом под ключ.
-              </p>
-              <ul className="flist">
-                <li><span className="fi" /><span className="c-cream">Индивидуальное проектирование конструкции под ваше ТЗ и площадку.</span></li>
-                <li><span className="fi" /><span className="c-cream">Инженерия: расчёт ветровых и сейсмических нагрузок.</span></li>
-                <li><span className="fi" /><span className="c-cream">Официальный участник тендеров — работаем по 44-ФЗ и 223-ФЗ.</span></li>
-                <li><span className="fi" /><span className="c-cream">Электрогирлянды для наружного освещения — производим под проект площадки.</span></li>
-                <li><span className="fi" /><span className="c-cream">Монтаж под ключ, включая высотные работы и установку кранами.</span></li>
-              </ul>
-              <h3 className="h3 c-cream" style={{ fontSize: 22, marginTop: 34 }}>Дизайнерские ёлки 2026 года</h3>
-              <div className="newbox" style={{ marginTop: 16 }}>
-                <div className="newcard">
-                  <img className="newcard-media" src={exh2} alt="Ель 5 м с интегрированным светом" />
-                  <div className="newcard-b">
-                    <div className="badge-new">Новинка</div>
-                    <div className="serif c-cream" style={{ fontSize: 24, marginTop: 12 }}>Ель 5 м</div>
-                    <div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 4 }}>с интегрированным светом в конструкции</div>
-                  </div>
-                </div>
-                <div className="newcard">
-                  <img className="newcard-media" src={exh4} alt="Ель-колонна 6 м" />
-                  <div className="newcard-b">
-                    <div className="badge-new">Новинка</div>
-                    <div className="serif c-cream" style={{ fontSize: 24, marginTop: 12 }}>Ель-колонна 6 м</div>
-                    <div className="c-mut2" style={{ color: '#cfc7b7', fontSize: 14, marginTop: 4 }}>компактная форма для площадей и атриумов</div>
-                  </div>
-                </div>
-              </div>
-              <div className="fx wrap gap16" style={{ marginTop: 32 }}>
-                <button className="btn btn-red" onClick={() => scrollToId('quiz')}>Рассчитать проект по ТЗ →</button>
+          <div style={{ maxWidth: 780 }}>
+            <div className="eyebrow c-gold">Направление 02 · Уличные высотные ели</div>
+            <h2 className="h2 c-cream" style={{ marginTop: 16 }}>Уличные высотные ели любой сложности — по вашему ТЗ</h2>
+            <p className="lead c-mut2" style={{ marginTop: 18, color: '#cfc7b7' }}>
+              Для городских администраций, девелоперов и парков. Проектируем и производим уличные ели с полным инженерным расчётом и монтажом под ключ.
+            </p>
+            <ul className="flist">
+              <li><span className="fi" /><span className="c-cream">Индивидуальное проектирование конструкции под ваше ТЗ и площадку.</span></li>
+              <li><span className="fi" /><span className="c-cream">Инженерия: расчёт ветровых и сейсмических нагрузок.</span></li>
+              <li><span className="fi" /><span className="c-cream">Официальный участник тендеров — работаем по 44-ФЗ и 223-ФЗ.</span></li>
+              <li><span className="fi" /><span className="c-cream">Электрогирлянды для наружного освещения — производим под проект площадки.</span></li>
+              <li><span className="fi" /><span className="c-cream">Монтаж под ключ, включая высотные работы и установку кранами.</span></li>
+            </ul>
+            <div className="fx wrap gap16" style={{ marginTop: 32 }}>
+              <button className="btn btn-red" onClick={() => scrollToId('quiz')}>Рассчитать проект по ТЗ →</button>
+            </div>
+          </div>
+
+          <h3 className="h3 c-cream" style={{ fontSize: 'clamp(24px,2.6vw,32px)', marginTop: 'clamp(52px,7vw,80px)' }}>Дизайнерские ёлки 2026 года</h3>
+          <div className="newbox newbox-lg" style={{ marginTop: 26 }}>
+            <div className="newcard">
+              <img className="newcard-media" src={exh2} alt="Ель 5 м с интегрированным светом" />
+              <div className="newcard-b">
+                <div className="badge-new">Новинка</div>
+                <div className="serif c-cream newcard-t">Ель 5 м</div>
+                <div className="c-mut2 newcard-d">с интегрированным светом в конструкции</div>
               </div>
             </div>
-            <div>
-              <div className="media-tall"><img src={outdoorNight} alt="Высотная уличная ель ночью" /></div>
+            <div className="newcard">
+              <img className="newcard-media" src={exh4} alt="Ель-колонна 6 м" />
+              <div className="newcard-b">
+                <div className="badge-new">Новинка</div>
+                <div className="serif c-cream newcard-t">Ель-колонна 6 м</div>
+                <div className="c-mut2 newcard-d">компактная форма для площадей и атриумов</div>
+              </div>
             </div>
           </div>
         </div>
