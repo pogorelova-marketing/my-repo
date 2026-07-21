@@ -5,6 +5,7 @@ import logoDark from '../assets/logo-dark.png'
 const LINKS = [
   { id: 'interior', label: 'Интерьер' },
   { id: 'outdoor', label: 'Улица' },
+  { id: 'garlands', label: 'Гирлянды' },
   { id: 'case', label: 'Наши работы' },
   { id: 'trust', label: 'Гарантии' },
   { id: 'quiz', label: 'Подбор' },

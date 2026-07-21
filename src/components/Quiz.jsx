@@ -2,7 +2,18 @@ import { useRef, useState } from 'react'
 import { submitLead } from '../utils/submitForm'
 import { ymGoal } from '../utils/analytics'
 
-const QUESTIONS = [
+const PRODUCT_Q = {
+  key: 'product',
+  title: 'Что вас интересует?',
+  hint: 'Подберём решение под ваш формат.',
+  options: [
+    { label: 'Высотная ель (интерьер / улица)', value: 'tree' },
+    { label: 'Электрогирлянды и иллюминация', value: 'garland' },
+    { label: 'Ель + гирлянды комплексно', value: 'both' },
+  ],
+}
+
+const TREE_QUESTIONS = [
   {
     key: 'loc',
     title: 'Где будет установлена ель?',
@@ -34,6 +45,34 @@ const QUESTIONS = [
       { label: 'Только ель, без спецдекора', value: 'none' },
     ],
   },
+]
+
+const GARLAND_QUESTIONS = [
+  {
+    key: 'place',
+    title: 'Где разместить гирлянды?',
+    hint: 'От этого зависит тип и монтаж.',
+    options: [
+      { label: 'Фасад здания', value: 'facade' },
+      { label: 'Деревья и аллеи', value: 'trees' },
+      { label: 'Уличная площадка / периметр', value: 'area' },
+      { label: 'Интерьер, витрины', value: 'indoor' },
+    ],
+  },
+  {
+    key: 'gtype',
+    title: 'Какой тип гирлянд?',
+    hint: 'Поможет подобрать комплектацию.',
+    options: [
+      { label: 'Бахрома', value: 'bahroma' },
+      { label: 'Сеть-занавес (фасад)', value: 'net' },
+      { label: 'Нить', value: 'string' },
+      { label: 'Нужен подбор', value: 'any' },
+    ],
+  },
+]
+
+const COMMON_TAIL = [
   {
     key: 'purchase',
     title: 'Как планируете закупку?',
@@ -56,6 +95,12 @@ const QUESTIONS = [
   },
 ]
 
+function questionsFor(product) {
+  if (product === 'garland') return [PRODUCT_Q, ...GARLAND_QUESTIONS, ...COMMON_TAIL]
+  if (product === 'both') return [PRODUCT_Q, TREE_QUESTIONS[0], TREE_QUESTIONS[1], GARLAND_QUESTIONS[0], ...COMMON_TAIL]
+  return [PRODUCT_Q, ...TREE_QUESTIONS, ...COMMON_TAIL]
+}
+
 const SEGMENTS = {
   gov: {
     color: '#243C60',
@@ -72,18 +117,30 @@ const SEGMENTS = {
     title: 'Профиль: интерьер · HoReCa / бизнес',
     text: 'Подберём интерьерную ель (включая новинки — 5 м с интегрированным светом и 6 м ель-колонну), декор и электрогирлянды для интерьерного освещения в вашем фирменном стиле — можем встроить подсветку в конструкцию ели. Пожаробезопасные материалы с допуском для мест массового пребывания.',
   },
+  illum: {
+    color: '#C79A5B',
+    title: 'Профиль: электрогирлянды / иллюминация',
+    text: 'Изготовим морозостойкие светодиодные гирлянды под ваш объект — бахрому, сети-занавесы или нити. Рассчитаем длину и сценарий свечения под фасад или площадку, подготовим смету и организуем монтаж. Оптовые цены от производителя, для тендеров — пакет документов по 44-ФЗ / 223-ФЗ.',
+  },
+  both: {
+    color: '#243C60',
+    title: 'Профиль: ель + иллюминация под ключ',
+    text: 'Спроектируем комплекс: высотную ель и электрогирлянды под вашу площадку в едином стиле. Рассчитаем нагрузки и сценарий свечения, подготовим смету и график монтажа. Для тендеров — пакет документов по 44-ФЗ / 223-ФЗ.',
+  },
 }
 
 function segmentFor(answers) {
+  if (answers.product === 'garland') return 'illum'
+  if (answers.product === 'both') return 'both'
   const bigOutdoor = answers.loc === 'outdoor' && (answers.height === '6-12' || answers.height === '12+')
   if (answers.purchase === 'tender' || bigOutdoor) return 'gov'
   if (answers.loc === 'outdoor') return 'street'
   return 'horeca'
 }
 
-function answersSummary(answers) {
+function answersSummary(questions, answers) {
   const summary = {}
-  for (const q of QUESTIONS) {
+  for (const q of questions) {
     const opt = q.options.find((o) => o.value === answers[q.key])
     if (opt) summary[q.title] = opt.label
   }
@@ -99,21 +156,25 @@ export default function Quiz() {
   const startedRef = useRef(false)
   const completedRef = useRef(false)
 
-  const active = step < QUESTIONS.length
-  const cur = QUESTIONS[Math.min(step, QUESTIONS.length - 1)]
+  const questions = questionsFor(answers.product)
+  const total = questions.length
+  const active = step < total
+  const cur = questions[Math.min(step, total - 1)]
   const seg = segmentFor(answers)
   const segMeta = SEGMENTS[seg]
-  const pct = Math.round((step / QUESTIONS.length) * 100)
+  const pct = Math.round((step / total) * 100)
 
   function pick(key, value) {
     if (!startedRef.current) {
       startedRef.current = true
       ymGoal('quiz_start')
     }
+    const nextAnswers = { ...answers, [key]: value }
+    const nextTotal = questionsFor(nextAnswers.product).length
     const next = step + 1
-    setAnswers((a) => ({ ...a, [key]: value }))
+    setAnswers(nextAnswers)
     setStep(next)
-    if (next >= QUESTIONS.length && !completedRef.current) {
+    if (next >= nextTotal && !completedRef.current) {
       completedRef.current = true
       ymGoal('quiz_complete')
     }
@@ -133,7 +194,7 @@ export default function Quiz() {
     try {
       const data = Object.fromEntries(new FormData(e.target))
       await submitLead(
-        { ...data, 'Профиль': segMeta.title, ...answersSummary(answers) },
+        { ...data, 'Профиль': segMeta.title, ...answersSummary(questions, answers) },
         'Заявка из квиза на сайте Max Christmas',
       )
       ymGoal('form_submit')
@@ -152,7 +213,7 @@ export default function Quiz() {
           {active ? (
             <>
               <div className="fx ac jb" style={{ marginBottom: 14 }}>
-                <span className="tag c-taupe">Вопрос {step + 1} из {QUESTIONS.length}</span>
+                <span className="tag c-taupe">Вопрос {step + 1} из {total}</span>
                 <span className="tag c-red">{pct}% пройдено</span>
               </div>
               <div className="prog"><div className="prog-in" style={{ width: `${pct}%` }} /></div>

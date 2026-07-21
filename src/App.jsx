@@ -10,6 +10,9 @@ import catVersal from './assets/cat-versal.jpg'
 import catKupech from './assets/cat-kupech.jpg'
 import exh2 from './assets/exh2.jpg'
 import exh4 from './assets/exh4.jpg'
+import garlandFacade from './assets/garland-facade.jpg'
+import garlandBahroma from './assets/garland-bahroma.jpg'
+import garlandNet from './assets/garland-net.jpg'
 import sev1 from './assets/sev1.jpg'
 
 const PHONE = '8 800 250-71-83'
@@ -61,7 +64,7 @@ function App() {
             <div className="eyebrow c-red">Квиз · 60 секунд</div>
             <h2 className="h2 c-navy" style={{ marginTop: 16 }}>Подберём решение и рассчитаем стоимость</h2>
             <p className="lead" style={{ marginTop: 16 }}>
-              Ответьте на 5 вопросов — мы определим формат вашего проекта и подготовим предложение с учётом закупки, высоты и декора.
+              Ответьте на несколько вопросов — мы определим формат вашего проекта (ель, гирлянды или комплекс) и подготовим предложение с учётом закупки, высоты и декора.
             </p>
           </div>
           <Quiz />
@@ -157,7 +160,59 @@ function App() {
         </div>
       </section>
 
-      {/* BLOCK 5 CASE — the flagship project gets the page's one dramatic
+      {/* BLOCK 5 GARLANDS */}
+      <section className="sec bg-beige" id="garlands">
+        <div className="wrap">
+          <div className="two">
+            <div>
+              <div className="eyebrow c-taupe">Направление 03 · Электрогирлянды и иллюминация</div>
+              <h2 className="h2 c-navy" style={{ marginTop: 16 }}>
+                Уличные электрогирлянды под ключ —{' '}
+                <span className="serif c-red" style={{ fontStyle: 'italic', fontWeight: 600 }}>морозостойкие</span>, под ваш фасад и площадку
+              </h2>
+              <p className="lead" style={{ marginTop: 18 }}>
+                Проектируем и производим светодиодные гирлянды для улицы и интерьера: бахрома, сети-занавесы и нити. Морозостойкие — рассчитаны на уличную эксплуатацию в мороз. Для отелей, ресторанов, ТРЦ, парков и городских администраций — оптом от производителя.
+              </p>
+              <div className="fx wrap gap10" style={{ marginTop: 22 }}>
+                <span className="chip">Фасады</span>
+                <span className="chip">Рестораны</span>
+                <span className="chip">ТРЦ</span>
+                <span className="chip">Отели</span>
+                <span className="chip">Парки</span>
+                <span className="chip">Улицы города</span>
+              </div>
+              <ul className="flist">
+                <li><span className="fi" /><span><b>Морозостойкие уличные гирлянды</b> — всесезонная эксплуатация при отрицательных температурах, провод не трескается на морозе.</span></li>
+                <li><span className="fi" /><span>Бахрома, сети-занавесы и нити — подберём тип под фасад, дерево или витрину.</span></li>
+                <li><span className="fi" /><span>Светодиодные — низкое энергопотребление и ресурс на сезоны вперёд.</span></li>
+                <li><span className="fi" /><span>Производим под проект: длина, шаг диодов и сценарий свечения — под вашу площадку.</span></li>
+                <li><span className="fi" /><span><b>Оптом от фабрики</b> — прямые цены без посредников, для сетей и госзакупок по 44-ФЗ / 223-ФЗ.</span></li>
+                <li><span className="fi" /><span>100% страховка грузов ТК — доставим в любой регион без риска.</span></li>
+              </ul>
+              <div className="fx wrap gap16" style={{ marginTop: 32 }}>
+                <button className="btn btn-red" onClick={() => scrollToId('quiz')}>Подобрать гирлянды за 60 секунд →</button>
+                <button className="btn btn-ghost-d" onClick={() => scrollToId('lead')}>Получить КП и смету</button>
+              </div>
+            </div>
+            <div className="media-tall"><img src={garlandFacade} alt="Иллюминация фасада здания электрогирляндами" /></div>
+          </div>
+          <div className="cat-grid">
+            <div className="cat-item">
+              <img src={garlandBahroma} alt="Гирлянда-бахрома для фасадов" />
+              <div className="cat-cap"><div className="tag c-cream" style={{ opacity: .7 }}>Тип</div><div className="serif" style={{ fontSize: 22 }}>Гирлянда-бахрома</div></div>
+            </div>
+            <div className="cat-item">
+              <img src={garlandNet} alt="Сеть-занавес для фасадов и деревьев" />
+              <div className="cat-cap"><div className="tag c-cream" style={{ opacity: .7 }}>Тип</div><div className="serif" style={{ fontSize: 22 }}>Сеть-занавес</div></div>
+            </div>
+          </div>
+          <p className="c-mut" style={{ fontSize: 13.5, marginTop: 26, maxWidth: '80ch' }}>
+            Уличные и новогодние гирлянды купить оптом от производителя — Max Christmas, Севастополь. Морозостойкие светодиодные гирлянды для фасадов, ресторанов, ТЦ и городских пространств.
+          </p>
+        </div>
+      </section>
+
+      {/* BLOCK 6 CASE — the flagship project gets the page's one dramatic
           type moment: a full-width numeral lead-in before the standard
           two-column body, so it reads as the peak, not another module. */}
       <section className="sec bg-cream" id="case">
